@@ -40,3 +40,7 @@
                with:
                 credentials_json: "${{secrets.GCP_SERVICE_ACCOUNT_KEY}}"
     
+             - name: deploy file on buckets
+               shell: 'bash'
+               run: |
+                gcloud storage cp bash_test gs://deploy-file/frontend-script/
