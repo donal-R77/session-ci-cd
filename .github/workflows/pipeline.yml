@@ -43,4 +43,4 @@
              - name: deploy file on buckets
                shell: 'bash'
                run: |
-                gcloud storage cp bash_test gs://deploy-file/frontend-script/
+                gcloud storage cp bash_test.sh gs://deploy-file/frontend-script
