@@ -5,7 +5,7 @@
         branches:
             - test-actions
  jobs:
-    build: 
+    build-image: 
         runs-on: ubuntu-latest
         
         steps:
@@ -28,4 +28,15 @@
             file: ./Dockerfile
             push: true
             tags: ${{secrets.DOCKERHUB_USERNAME}}/app-cat:latest
+
+    deploy-on-gcp:
+        needs: [build-image]
+        name: deploy to gcp
+        runs-on: ubuntu-latest
+        steps:
+             - uses: actions/checkout@v3.5.3
+             - name: 'Authentification'
+               uses: "google-github-actions/auth@v1"
+               with:
+                credentials_json: "${{secrets.GCP_SERVICE_ACCOUNT_KEY}}"
     
