@@ -2,7 +2,7 @@
 
 PORTS="5000:5000"
 CONTAINER_NAME="flex-box"
-IMAGE_NAME="maric77/app-cat:latest"
+IMAGE_NAME="maric77/cat-app:app-cat-box"
 
 #login to Docker Hub
 echo "${DOCKERHUB_TOKEN}" | docker login -u "${DOCKERHUB_USERNAME}" --password-stdin

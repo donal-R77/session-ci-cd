@@ -5,7 +5,7 @@
  env:
     APPLICATION_NAME: cat-app
  jobs:
-    buid-image:
+    build-image:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout repository
@@ -27,3 +27,19 @@
                 file: ./Dockerfile
                 push: true
                 tags: ${{secrets.DOCKERHUB_USERNAME}}/${{env.APPLICATION_NAME}}:app-cat-box     
+        
+    deploy-on-gcp:
+        needs: [build-image]
+        name: deploy to gcp
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v4
+        - name: 'Authentification'
+          uses: "google-github-actions/auth@v1"
+          with:
+            credentials_json: "${{secrets.GCP_SERVICE_ACCOUNT_KEY}}"
+        - name: deploy script
+          shell: 'bash'
+          run: |
+            gcloud storage cp bash_test.sh gs://cat-app/    
+
