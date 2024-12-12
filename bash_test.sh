@@ -1,18 +1,18 @@
 #!/bin/bash
 
 PORTS="5000:5000"
-CONTAINER_NAME="flex"
-IMAGE_NAME="maric77/flexbox:flex"
+CONTAINER_NAME="flex-box"
+IMAGE_NAME="maric77/cat-app:app-cat-box"
 
 #login to Docker Hub
-echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
+echo "${DOCKERHUB_TOKEN}" | docker login -u "${DOCKERHUB_USERNAME}" --password-stdin
 
 #Pull image in DockerHub
 docker pull "${IMAGE_NAME}"
     
 # check if container exists or not
 if [[ $(docker ps -qqa -f name="${CONTAINER_NAME}") ]] ; then 
-  docker container stop flex && docker container rm flex
+  docker container stop flex-box && docker container rm flex-box
 fi 
 docker run -d -p ${PORTS} --name ${CONTAINER_NAME} ${IMAGE_NAME}
 
