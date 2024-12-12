@@ -1,7 +1,7 @@
  name: pipeline
  on:
     push:
-        branches: ['maric']
+        branches: ['development']
  env:
     APPLICATION_NAME: cat-app
  jobs:
