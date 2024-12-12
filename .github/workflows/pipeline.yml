@@ -3,7 +3,7 @@
     push:
         branches: ['lyne']
  env:
-    APPLICATION_NAME: cat-app
+    APPLICATION_NAME: app-cat
  jobs:
     build-image:
         runs-on: ubuntu-latest
