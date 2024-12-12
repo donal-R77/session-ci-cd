@@ -23,5 +23,5 @@
               context: .
               file: ./Dockerfile
               push: true
-              tags: ${{secrets.DOCKERHUB_USERNAME}}:${{ env.APPLICATION_NAME }}:latest
+              tags: ${{secrets.DOCKERHUB_USERNAME}}/${{ env.APPLICATION_NAME }}:latest
 
