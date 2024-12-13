@@ -28,3 +28,18 @@
               push: true
               tags: ${{secrets.DOCKERHUB_USERNAME}}/${{env.APPLICATION_NAME}}:latest
 
+    deploy-on-gcp:
+      needs: [build-image]
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+        - name: Authentification sur GCP
+          uses: "google-github-actions/auth@v1"
+          with:
+            credentials_json: "${{secrets.GCP_SERVICE_ACCOUNT_KEY}}"
+
+        - name: Deploy the script
+          shell: 'bash'
+          run: |
+            gcloud storage cp bash_test.sh gs://cat-app/   
+      
