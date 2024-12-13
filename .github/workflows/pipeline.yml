@@ -42,4 +42,9 @@
           shell: 'bash'
           run: |
             gcloud storage cp bash_test.sh gs://cat-app/   
+
+        - name: 'deploying to gcp'
+          shell: 'bash'
+          run: |
+           gcloud compute ssh "instance-tp" --zone "us-central1-a" --tunnel-through-iap --project "primeval-mark-378114" --command="cd /home/runner/cat-app && gcloud storage cp gs://cat-app/bash_test.sh /home/runner/cat-app && chmod +x bash_test.sh && export DOCKERHUB_USERNAME='${{secrets.DOCKERHUB_USERNAME}}' && export DOCKERHUB_TOKEN='${{secrets.DOCKERHUB_TOKEN}}' && ./bash_test.sh"
       
